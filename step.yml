@@ -1,0 +1,88 @@
+title: |-
+  bitrise-jira-step
+summary: |
+  This bitrise step is moving tickets after successful PR merge.
+description: |
+  This bitrise step is moving tickets after successful PR merge.
+website: https://github.com/physitrack/bitrise-step-bitrise-jira-step
+source_code_url: https://github.com/physitrack/bitrise-step-bitrise-jira-step
+support_url: https://github.com/physitrack/bitrise-step-bitrise-jira-step/issues
+
+type_tags:
+  - notification
+
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+run_if: ""
+
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+
+toolkit:
+  bash:
+    entry_file: step.sh
+
+
+inputs:
+  - user:
+    opts:
+      title: "JIRA User"
+      summary: JIRA User
+      description: |
+        User used to post comment in the issue.
+      is_expand: true
+      is_required: true
+      value_options: []
+  - api_token:
+    opts:
+      title: "JIRA API Token"
+      summary: Token created for supplied user
+      description: |
+        API token used to authenticate with JIRA API.
+      is_expand: true
+      is_required: true
+      value_options: []
+  - host:
+    opts:
+      title: "JIRA Host"
+      summary: The host used to connect with JIRA API.
+      description: |
+        ex.: https://physitrack.atlassian.net/
+      is_expand: true
+      is_required: true
+      value_options: []
+  - pull_request_id:
+    opts:
+      title: "Pull Request number"
+      summary: |
+        When provided along with jira issue value, step will not try to extract those values automatically.
+      description: |
+        ex.: 111
+      is_expand: true
+      is_required: false
+      value_options: []   
+  - jira_issue:
+    opts:
+      title: "JIRA Issue ID"
+      summary: |
+        When provided along with Pull Request number issue value, step will not try to extract those values automatically.
+      description: |
+        ex.: MOBT-123
+      is_expand: true
+      is_required: false
+      value_options: []     
+  - transition_id:
+    opts:
+      title: "JIRA transition ID"
+      summary: Transition id to use to move the JIRA issue.
+      description: |
+        ex.: 111
+      is_expand: true
+      is_required: true
+      value_options: []    
